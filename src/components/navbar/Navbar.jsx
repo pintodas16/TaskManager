@@ -12,7 +12,7 @@ function Navbar() {
         {/* <!-- logo --> */}
 
         <NavLink to="/">
-          <span className=" text-2xl font-bold cursor-pointer text-red-300 hover:opacity-70 ">
+          <span className="text-xl  md:text-2xl font-bold cursor-pointer text-red-300 hover:opacity-70 ">
             Task Manager
           </span>
         </NavLink>
@@ -28,7 +28,7 @@ function Navbar() {
               ? "/create-task"
               : "/"
           }`}
-          className="  px-6 py-2 bg-red-300 border border-bg-red-400 rounded-lg text-xl font-bold text-center text-gray-600 hover:bg-white hover:border-rose-500 hover:text-red-400 "
+          className=" px-2 md:px-6 py-2 bg-red-300 border border-bg-red-400 rounded-lg text-lg md:text-xl font-bold text-center text-gray-600 hover:bg-white hover:border-rose-500 hover:text-red-400 "
         >
           {pathname === "/create-task" ? "Back to homepage" : "Create Task"}
         </NavLink>

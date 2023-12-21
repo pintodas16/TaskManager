@@ -8,13 +8,6 @@ In this repository I implement the front-end part of my full-stack Task-manager 
     $ cd TaskManager
     $ npm install
 
-### Configure app
-
-change the axios instance url in axios.js file.
-
-- backend api
-- development
-
 ## Start & watch
 
     $ npm run dev
@@ -30,6 +23,16 @@ change the axios instance url in axios.js file.
 <li>User can create Task </li>
 <li>User can Delete Task </li>
 <li>User can update task</li>
-<li>User can sort tasks based on task status, date,and search based title</li>
+<li>User can sort tasks based on task status, date,and search based on task title</li>
 
 </ul>
+
+## Frontend Technologies:
+
+- React
+- Tailwind css
+
+## Code Link:
+
+- Backend - https://github.com/pintodas16/Task-CRUD
+- Frontend - https://github.com/pintodas16/TaskManager

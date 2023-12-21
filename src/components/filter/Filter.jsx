@@ -10,12 +10,12 @@ function Filter() {
     dispatch({ type: "filter/filterBy", payload: e.target.value });
   };
   return (
-    <div className="flex flex-wrap gap-1 md:flex-2  items-center ">
+    <div className="flex flex-wrap gap-1 items-center ">
       <h5 className="text-lg md:text-xl bold capitalize ">filter :</h5>
       <select
         name=""
         id=""
-        className="px-2 py-1 md:text-lg border-2 border-gray-200 border-dotted focus:ring-blue-400 focus:outline-blue-400
+        className="px-2 py-1 text-md md:text-lg border-2 border-gray-200 border-dotted focus:ring-blue-400 focus:outline-blue-400
                     rounded-lg"
         value={option}
         onChange={handleChange}

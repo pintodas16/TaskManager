@@ -11,11 +11,11 @@ function Sort() {
   };
   return (
     <div className="flex flex-wrap md:gap-2 items-center  ">
-      <h5 className="text-lg md:text-xl bold capitalize ">sort by :</h5>
+      <h5 className="text-md md:text-xl bold capitalize ">sort by :</h5>
       <select
         name=""
         id=""
-        className="px-2 py-1 md:text-lg border-2 border-gray-200 border-dotted focus:ring-blue-400 focus:outline-blue-400
+        className=" py-1 md:px-2 md:text-lg border-2 border-gray-200 border-dotted focus:ring-blue-400 focus:outline-blue-400
                         rounded-lg"
         value={option}
         onChange={handleChange}
