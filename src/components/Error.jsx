@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 function Error({ error, tasks }) {
   // const { error, isError } = useTaskContext();
-  // console.log(error, isError);
-  console.log(error, tasks, typeof tasks);
+  console.log(error);
+
   return (
     <div className="w-full flex justify-center  ">
       <div className="w-80 border border-red-900 rounded-lg text-center">

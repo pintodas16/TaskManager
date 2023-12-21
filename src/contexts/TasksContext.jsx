@@ -16,6 +16,7 @@ const reducer = (state, action) => {
         ...state,
         isLoading: true,
         isError: false,
+        // error: "",
       };
     case "task/getTasks": {
       // console.log(action.payload);
@@ -24,6 +25,7 @@ const reducer = (state, action) => {
         tasks: action.payload,
         isLoading: false,
         isError: false,
+        error: "",
         // isEditing: false,
         // task: {},
       };
@@ -69,7 +71,6 @@ const reducer = (state, action) => {
         task: action.payload,
         isLoading: false,
         isError: false,
-        error: "",
       };
     case "task/rejected":
       return {

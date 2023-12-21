@@ -14,11 +14,10 @@ import "./index.css";
 import TasksPage from "./pages/TasksPage.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />}>
+    <Route path="/" element={<App />} errorElement={<FouOhFour />}>
       <Route path="" element={<TasksPage />} />
       <Route path="/create-task" element={<AddTaskContainer />} />
       <Route path="/update-Task/:id" element={<EditTaskContainer />} />
-      <Route path="*" element={<FouOhFour />} />
     </Route>
   )
 );
