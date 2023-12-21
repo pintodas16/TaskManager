@@ -1,12 +1,13 @@
 import { useState } from "react";
+import { useFilterContext } from "../../contexts/FilterContex";
 
 function SearchBox() {
-  // const { dispatch } = useFilterContext();
+  const { dispatch } = useFilterContext();
   const [title, setTitle] = useState("");
   const handleChange = (e) => {
     setTitle(e.target.value);
     // console.log(e.target.value);
-    // dispatch({ type: "filter/searchTerm", payload: e.target.value.trim() });
+    dispatch({ type: "filter/searchTerm", payload: e.target.value.trim() });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
