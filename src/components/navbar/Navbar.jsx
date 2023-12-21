@@ -33,7 +33,7 @@ function Navbar() {
           {pathname === "/create-task" ? "Back to homepage" : "Create Task"}
         </NavLink>
       </nav>
-      <FilterContainer />
+      {pathname === "/" ? <FilterContainer /> : ""}
     </header>
   );
 }
