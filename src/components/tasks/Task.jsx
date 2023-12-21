@@ -2,29 +2,24 @@ import { Link } from "react-router-dom";
 import { useTaskContext } from "../../contexts/TasksContext";
 
 function Task({ task }) {
-  const { taskEdit } = useTaskContext();
+  const { deleteTask } = useTaskContext();
   const handleDelete = (id) => {
-    console.log("delete");
+    deleteTask(id);
   };
-  const handleEdit = (id) => {
-    console.log("edit");
-  };
+
   return (
     <div className="border shadow-lg px-6 py-4 rounded-xl bg-white   transition-all duration-300 hover:border-gray-400 hover:shadow-xl ">
       {/* <!-- edit and delete  --> */}
       <div className="flex justify-end gap-2 items-center ">
         <Link to={`/update-Task/${task._id}`}>
-          <span
-            className="px-3 py-1 border rounded-md hover:bg-green-400"
-            onClick={() => handleEdit(4)}
-          >
+          <span className="px-3 py-1 border rounded-md hover:bg-green-400">
             <i className="fa-regular fa-pen-to-square"></i>
           </span>
         </Link>
         {/* delete button  */}
         <span
           className="px-3 py-1 border rounded-md hover:bg-red-500"
-          onClick={() => handleDelete(5)}
+          onClick={() => handleDelete(task._id)}
         >
           <i className="fa-solid fa-trash-can"></i>
         </span>

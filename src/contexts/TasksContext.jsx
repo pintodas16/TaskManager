@@ -40,6 +40,7 @@ const reducer = (state, action) => {
     }
     case "task/deleted": {
       const id = action.payload;
+      console.log(id);
       return {
         ...state,
         tasks: state.tasks.filter((task) => task._id !== id),
@@ -130,6 +131,7 @@ function TaskContextProvider({ children }) {
     }
   };
   const deleteTask = async (id) => {
+    console.log(id);
     dispatch({ type: "loading" });
     try {
       await axios.delete(`/tasks/${id}`);
