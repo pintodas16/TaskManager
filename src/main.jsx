@@ -16,7 +16,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route path="" element={<TasksPage />} />
       <Route path="/create-task" element={<AddTaskContainer />} />
-      <Route path="/update-Task" element={<EditTaskContainer />} />
+      <Route path="/update-Task/:id" element={<EditTaskContainer />} />
     </Route>
   )
 );

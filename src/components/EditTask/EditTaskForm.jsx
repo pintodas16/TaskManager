@@ -1,13 +1,19 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+import { useTaskContext } from "../../contexts/TasksContext.jsx";
 import Form from "../form/Form.jsx";
 import Input from "../form/Input.jsx";
 const options = [
-  { value: "select-one", label: "Select One" },
+  { value: "Created", label: "Created" },
   { value: "In-Progress", label: "In-Progress" },
   { value: "Completed", label: "Completed" },
+  { value: "Pending", label: "Pending" },
 ];
-function EditTaskForm() {
+function EditTaskForm({ task }) {
+  const navigate = useNavigate();
+  const { updateTask } = useTaskContext();
+  const { _id, title, description, status, due_date } = task;
   //   const navigate = useNavigate();
   // const [title, setTitle] = useState("");
   // const [description, setDescription] = useState("");
@@ -17,11 +23,14 @@ function EditTaskForm() {
 
   // console.log(error);
   const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    status: "",
-    date: "",
+    title: title,
+    description: description,
+    status: status,
+    date: due_date,
   });
+
+  // update the formfield according to task data
+
   const [errors, setErrors] = useState({});
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -68,10 +77,16 @@ function EditTaskForm() {
 
     if (validateForm()) {
       // form is valid
-      // check if there is already task exis or not
+      // update the task
+      const editedTask = {
+        ...formData,
+        due_date: formData.date,
+      };
+      // console.log(editedTask);
+      await updateTask(_id, editedTask);
+      navigate("/");
     } else {
-      // form is invalid
-      console.log("form is not valid ");
+      return;
     }
   };
 

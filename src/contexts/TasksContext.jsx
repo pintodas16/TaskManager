@@ -48,19 +48,27 @@ const reducer = (state, action) => {
       };
     }
     case "task/updated": {
+      // console.log(action.payload);
+      const updatedTasks = state.tasks.map((task) =>
+        task._id === action.payload._id ? action.payload : task
+      );
+      console.log(updatedTasks);
       return {
         ...state,
-        tasks: [...state.tasks, action.payload],
+        tasks: updatedTasks,
         isLoading: false,
         isError: false,
         task: {},
       };
     }
-    case "task/isEdit":
-      console.log(action.payload);
+    case "task/getSingleTask":
+      // console.log(action.payload);
       return {
         ...state,
         task: action.payload,
+        isLoading: false,
+        isError: false,
+        error: "",
       };
     case "task/rejected":
       return {
@@ -86,7 +94,7 @@ function TaskContextProvider({ children }) {
     dispatch({ type: "loading" });
     try {
       const response = await axios.get("/tasks");
-      console.log(response);
+      // console.log(response);
       // dispatch("task/getTasks", response.data.data);
       dispatch({ type: "task/getTasks", payload: response.data.data });
     } catch (error) {
@@ -95,7 +103,17 @@ function TaskContextProvider({ children }) {
       dispatch({ type: "task/rejected", payload: error.message });
     }
   };
-
+  // get single task
+  const getSingleTask = async (id) => {
+    dispatch({ type: "loading" });
+    try {
+      const response = await axios.get(`/tasks/${id}`);
+      // console.log(response);
+      dispatch({ type: "task/getSingleTask", payload: response.data });
+    } catch (error) {
+      dispatch({ type: "task/rejected", payload: error.message });
+    }
+  };
   // handle create task
   const createTask = async (task) => {
     dispatch({ type: "loading" });
@@ -124,7 +142,16 @@ function TaskContextProvider({ children }) {
     // console.log(data);
     dispatch({ type: "task/isEdit", payload: data });
   };
-  const updateTask = async (id, data) => {};
+  const updateTask = async (id, data) => {
+    // console.log(id, data);
+    dispatch({ type: "loading" });
+    try {
+      const response = await axios.put(`/tasks/${id}`, JSON.stringify(data));
+      dispatch({ type: "task/updated", payload: response.data.data });
+    } catch (error) {
+      dispatch({ type: "task/rejected", payload: error.response.data.message });
+    }
+  };
 
   useEffect(() => {
     getTasks();
@@ -141,7 +168,7 @@ function TaskContextProvider({ children }) {
         createTask,
         deleteTask,
         updateTask,
-        taskEdit,
+        getSingleTask,
       }}
     >
       {children}
