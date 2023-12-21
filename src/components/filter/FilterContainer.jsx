@@ -6,7 +6,7 @@ function FilterContainer() {
     // <!-- filter and sort  -->
     <section className="">
       {/* <!-- container  -->  */}
-      <div className="container max-w-6xl mx-auto mt-6 mb-8 px-4 py-4 border border-gray-300 bg-white border-dotted rounded-lg">
+      <div className="container max-w-6xl mx-auto mt-6 mb-8 px-4 py-4 border-2 border-gray-300 bg-white  border-dotted rounded-lg shadow-md">
         {/* <!-- flex continaer  -->  */}
         <div className="flex items-center gap-4 justify-end">
           {/* <!-- for filtering  -->  */}

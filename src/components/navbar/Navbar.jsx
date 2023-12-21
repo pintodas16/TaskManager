@@ -4,7 +4,7 @@ import SearchBox from "./SearchBox.jsx";
 function Navbar() {
   const { pathname } = useLocation();
 
-  // console.log(pathname);
+  console.log(pathname);
 
   return (
     <header className="px-10 md:px-6 ">
@@ -21,10 +21,16 @@ function Navbar() {
         <SearchBox />
         {/* <!-- add task  --> */}
         <NavLink
-          to="/create-task"
+          to={`${
+            pathname === "/"
+              ? "/create-task"
+              : pathname !== "/create-task"
+              ? "/create-task"
+              : "/"
+          }`}
           className="  px-6 py-2 bg-red-300 border border-bg-red-400 rounded-lg text-xl font-bold text-center text-gray-600 hover:bg-white hover:border-rose-500 hover:text-red-400 "
         >
-          Create Task
+          {pathname === "/create-task" ? "Back to homepage" : "Create Task"}
         </NavLink>
       </nav>
       <FilterContainer />

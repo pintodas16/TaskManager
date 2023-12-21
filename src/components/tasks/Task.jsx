@@ -1,7 +1,21 @@
 import { Link } from "react-router-dom";
 import { useTaskContext } from "../../contexts/TasksContext";
-
+const daysOfmonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 function Task({ task }) {
+  // task date:
+  let taskDate = new Date(task.due_date);
+
+  // Current date
+  let currentDate = new Date();
+
+  // Calculate the difference in milliseconds
+  let timeDifference = taskDate - currentDate;
+
+  // Convert the difference to days
+  let calculateDay = Math.floor(timeDifference / (1000 * 60 * 60 * 24)) + 1;
+
+  console.log(calculateDay);
+
   const { deleteTask } = useTaskContext();
   const handleDelete = (id) => {
     deleteTask(id);
@@ -31,7 +45,17 @@ function Task({ task }) {
       <p className="mt-4">{task.description}</p>
 
       {/* <!-- status  --> */}
-      <div className=" flex justify-end  gap-2 mt-6">
+      <div className=" flex justify-between  mt-6">
+        <span className="text-gray-500">
+          {task.status === "Completed" ? (
+            ""
+          ) : (
+            <span>
+              <b>{calculateDay < 0 ? calculateDay * -1 : calculateDay} days </b>
+              {calculateDay < 0 ? " over Due " : " remainning"}
+            </span>
+          )}
+        </span>
         <span
           className={`${
             task.status === "In-Progress"
