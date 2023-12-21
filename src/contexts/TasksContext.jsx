@@ -29,11 +29,13 @@ const reducer = (state, action) => {
       };
     }
     case "task/created": {
+      console.log(action.payload);
       return {
         ...state,
         tasks: [...state.tasks, action.payload],
         isLoading: false,
         isError: false,
+        error: "",
       };
     }
     case "task/deleted": {
@@ -78,6 +80,8 @@ function TaskContextProvider({ children }) {
     reducer,
     initialState
   );
+
+  // handle get all tasks
   const getTasks = async () => {
     dispatch({ type: "loading" });
     try {
@@ -91,15 +95,20 @@ function TaskContextProvider({ children }) {
       dispatch({ type: "task/rejected", payload: error.message });
     }
   };
+
+  // handle create task
   const createTask = async (task) => {
     dispatch({ type: "loading" });
     try {
       const response = await axios.post("/tasks", JSON.stringify(task));
+      // console.log(response.data);
       dispatch({ type: "task/created", payload: response.data.data });
+      return response.data;
     } catch (error) {
       console.log("error block");
       // console.log(error.response.data.message);
       dispatch({ type: "task/rejected", payload: error.response.data.message });
+      return error.response.data;
     }
   };
   const deleteTask = async (id) => {

@@ -1,25 +1,16 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+import { useTaskContext } from "../../contexts/TasksContext.jsx";
 import Form from "../form/Form.jsx";
 import Input from "../form/Input.jsx";
-const options = [
-  { value: "select-one", label: "Select One" },
-  { value: "In-Progress", label: "In-Progress" },
-  { value: "Completed", label: "Completed" },
-];
-function AddTaskFrom() {
-  //   const navigate = useNavigate();
-  // const [title, setTitle] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [status, setStatus] = useState({});
-  // const [date, setDate] = useState("");
-  // const [error, setError] = useState(false);
 
-  // console.log(error);
+function AddTaskFrom() {
+  const navigate = useNavigate();
+  const { createTask } = useTaskContext();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    status: "",
     date: "",
   });
   const [errors, setErrors] = useState({});
@@ -43,10 +34,6 @@ function AddTaskFrom() {
     if (!formData.description.trim()) {
       validationErrors.description = "Description is required";
     }
-    //validate status
-    if (!formData.status) {
-      validationErrors.status = "select task status";
-    }
     // validate date
     if (!formData.date) {
       validationErrors.date = "date must be selected";
@@ -69,9 +56,27 @@ function AddTaskFrom() {
     if (validateForm()) {
       // form is valid
       // check if there is already task exis or not
+      const task = {
+        ...formData,
+        due_date: formData.date,
+      };
+      const data = await createTask(task);
+      // console.log(data);
+      if (data._success) {
+        console.log("task created");
+        setFormData({
+          title: "",
+          description: "",
+          date: "",
+        });
+        navigate("/");
+      } else {
+        console.log("task already exist ");
+      }
     } else {
       // form is invalid
       console.log("form is not valid ");
+      navigate("/create-task");
     }
   };
 
@@ -94,17 +99,6 @@ function AddTaskFrom() {
         name="description"
         error={errors}
         value={formData.description}
-        onChange={handleInputChange}
-      />
-
-      {/* <!-- input for status --> */}
-      <Input
-        label="status"
-        type="select"
-        options={options}
-        name="status"
-        error={errors}
-        value={formData.status}
         onChange={handleInputChange}
       />
 

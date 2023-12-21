@@ -41,7 +41,9 @@ function Task({ task }) {
               ? "bg-yellow-400"
               : task.status === "Completed"
               ? "bg-green-500"
-              : "bg-red-500"
+              : task.status === "Created"
+              ? "bg-gray-200"
+              : "bg-red-700"
           } px-2 py-1 text-md rounded-md font-semibold`}
         >
           {task.status}
