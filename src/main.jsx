@@ -7,6 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from "./App.jsx";
+import FouOhFour from "./components/404.jsx";
 import AddTaskContainer from "./components/AddTask/AddTaskContainer.jsx";
 import EditTaskContainer from "./components/EditTask/EditTaskContainer.jsx";
 import "./index.css";
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
       <Route path="" element={<TasksPage />} />
       <Route path="/create-task" element={<AddTaskContainer />} />
       <Route path="/update-Task/:id" element={<EditTaskContainer />} />
+      <Route path="*" element={<FouOhFour />} />
     </Route>
   )
 );
