@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { useFilterContext } from "../../contexts/FilterContex";
 
 function Sort() {
-  const { dispatch } = useFilterContext();
+  // const { dispatch } = useFilterContext();
   const [option, setOption] = useState("");
   const handleChange = (e) => {
     setOption(e.target.value);
     console.log(e.target.value);
-    dispatch({ type: "filter/sortBy", payload: e.target.value });
+    // dispatch({ type: "filter/sortBy", payload: e.target.value });
   };
   return (
     <div className="flex flex-wrap md:gap-2 items-center  ">

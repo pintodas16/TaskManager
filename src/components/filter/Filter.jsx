@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useFilterContext } from "../../contexts/FilterContex";
+
 function Filter() {
-  const { dispatch } = useFilterContext();
+  // const { dispatch } = useFilterContext();
   const [option, setOption] = useState("");
   const handleChange = (e) => {
     setOption(e.target.value);
     console.log(e.target.value);
-    dispatch({ type: "filter/filterBy", payload: e.target.value });
+    // dispatch({ type: "filter/filterBy", payload: e.target.value });
   };
   return (
     <div className="flex flex-wrap gap-1 md:flex-2  items-center ">

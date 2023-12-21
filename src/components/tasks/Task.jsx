@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Task() {
+function Task({ task }) {
   const handleDelete = (id) => {
     console.log("delete");
   };
@@ -28,26 +28,26 @@ function Task() {
         </span>
       </div>
       {/* <!-- title  --> */}
-      <h4 className="text-xl  font-semibold  ">Ttitle</h4>
+      <h4 className="text-xl  font-semibold  ">{task.title}</h4>
 
       {/* description  */}
-      <p className="mt-4">description</p>
+      <p className="mt-4">{task.description}</p>
 
       {/* <!-- status  --> */}
       <div className=" flex justify-end  gap-2 mt-6">
-        <span className="px-2 py-1 text-md rounded-md font-semibold">
-          status
+        <span
+          className={`${
+            task.status === "In-Progress"
+              ? "bg-yellow-400"
+              : task.status === "Completed"
+              ? "bg-green-500"
+              : "bg-red-500"
+          } px-2 py-1 text-md rounded-md font-semibold`}
+        >
+          {task.status}
         </span>
       </div>
     </div>
   );
 }
 export default Task;
-
-// className={`${
-//   task.status === "In-Progress"
-//     ? "bg-yellow-400"
-//     : task.status === "Completed"
-//     ? "bg-green-500"
-//     : "bg-red-500"
-// }

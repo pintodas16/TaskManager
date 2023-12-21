@@ -7,7 +7,6 @@ const initialState = {
   isLoading: false,
   isError: false,
   error: "",
-  isEditing: false,
   task: {},
 };
 const reducer = (state, action) => {
@@ -52,13 +51,13 @@ const reducer = (state, action) => {
         tasks: [...state.tasks, action.payload],
         isLoading: false,
         isError: false,
+        task: {},
       };
     }
     case "task/isEdit":
       console.log(action.payload);
       return {
         ...state,
-        isEditing: true,
         task: action.payload,
       };
     case "task/rejected":
@@ -75,7 +74,7 @@ const reducer = (state, action) => {
 
 const TaskContext = createContext();
 function TaskContextProvider({ children }) {
-  const [{ isLoading, isError, error, tasks, isEditng }, dispatch] = useReducer(
+  const [{ isLoading, isError, error, tasks, task }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -83,6 +82,7 @@ function TaskContextProvider({ children }) {
     dispatch({ type: "loading" });
     try {
       const response = await axios.get("/tasks");
+      console.log(response);
       // dispatch("task/getTasks", response.data.data);
       dispatch({ type: "task/getTasks", payload: response.data.data });
     } catch (error) {
@@ -111,10 +111,11 @@ function TaskContextProvider({ children }) {
       dispatch({ type: "task/rejected", payload: error.response.data.message });
     }
   };
-  const isTaskEdit = (data) => {
+  const taskEdit = async (data) => {
     // console.log(data);
     dispatch({ type: "task/isEdit", payload: data });
   };
+  const updateTask = async (id, data) => {};
 
   useEffect(() => {
     getTasks();
@@ -127,10 +128,11 @@ function TaskContextProvider({ children }) {
         isError,
         error,
         tasks,
-        getTasks,
+        task,
         createTask,
         deleteTask,
-        isTaskEdit,
+        updateTask,
+        taskEdit,
       }}
     >
       {children}
