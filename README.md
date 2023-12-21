@@ -21,9 +21,11 @@ In this repository I implement the front-end part of my full-stack Task-manager 
 <ul>
 <li>Responsive layout using tailwind css </li>
 <li>User can create Task </li>
+<li>User can not create Task with same name</li>
 <li>User can Delete Task </li>
 <li>User can update task</li>
 <li>User can sort tasks based on task status, date,and search based on task title</li>
+<li>calcuate remaining date based on task due_date.</li>
 
 </ul>
 
